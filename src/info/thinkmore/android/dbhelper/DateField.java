@@ -1,8 +1,8 @@
 package info.thinkmore.android.dbhelper;
 
-import java.util.Date;
-
 import android.database.Cursor;
+import android.util.Log;
+import java.util.Date;
 
 public class DateField extends BaseField {
 
@@ -14,13 +14,15 @@ public class DateField extends BaseField {
         if( isNull() ){
             throw new RuntimeException( String.format( "Field %s contains null value", getFieldName() ) );
         }
-        return new Date( cursor.getInt( columnIndex() ) );
+        long v = cursor.getLong(columnIndex());
+        return new Date(v);
     }
 
     public Date get( Date defvalue){
         if( isNull() ){
             return defvalue;
         }
-        return new Date( cursor.getInt( columnIndex() ) );
+        long v = cursor.getLong(columnIndex());
+        return new Date(v);
     }
 }
